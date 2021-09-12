@@ -12,6 +12,8 @@ namespace Insulin_diary
             InitializeComponent();
         }
 
+
+        /* this method will insert all data from the form into a database */
         private void btnAdd_Click(object sender, EventArgs e)
         {
             var con = "Data Source=DESKTOP-ELB063I\\SQLEXPRESS01;Initial Catalog=InsulinDiary;Integrated Security=True";
@@ -36,11 +38,13 @@ namespace Insulin_diary
             {
                 connection.Close();
                 this.Close();
-                var f = new FormShowAllValues();
+                var f = new FormShowAllValues();      /* f instances will show the user all values, including new values if the user before have added them */
                 f.Show();
             }
         }
 
+
+        /* this method will show to form current date and time at the moment when the form is opening */
         private void FormAddNewValue_Load(object sender, EventArgs e)
         {
             txtDate.Value = DateTime.Now.Date;

@@ -17,21 +17,22 @@ namespace Insulin_diary
             InitializeComponent();
         }
 
+
         private void btnConvert_Click(object sender, EventArgs e)
         {
-            if(txtMmol.Text == string.Empty || txtMmol.Text == null)
+            if(txtMmol.Text == string.Empty || txtMmol.Text == null)    /* check what value the user wants to convert (mmol --> Mg/Dl or Mg/Dl --> mmol) */
             {
                 txtResult.Text = (double.Parse(txtMg.Text) / 18).ToString("F");
             }
             else
             {
-                txtResult.Text = (double.Parse(txtMmol.Text) * 18).ToString("F");
+                txtResult.Text = (double.Parse(txtMmol.Text) * 18).ToString("F");   /* "F" returns a number with two decimals */
             }
         }
 
         private void Convertor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            var f = new FormInsulinDiary();
+            var f = new FormInsulinDiary();     /* f instance will show the main form */
             f.Show();
         }
     }

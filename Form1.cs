@@ -13,10 +13,12 @@ namespace Insulin_diary
             InitializeComponent();
         }
 
+
+        /* this button is here for showing all values */
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var display = new FormShowAllValues();
+            var display = new FormShowAllValues();      /* display instance will show form with all values from the database */
             display.Show();
         }
 
@@ -27,20 +29,20 @@ namespace Insulin_diary
 
         private void FormInsulinDiary_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Exit();
+            Application.ExitThread();   /* program will end */
         }
 
         private void BtnAddNewValue_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var f = new FormAddNewValue();
+            var f = new FormAddNewValue();      /* f instance will show the form for insert a new value */
             f.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var f = new Convertor();
+            var f = new Convertor();    /* f instance will show the form for convert values */
             f.Show();
         }
     }

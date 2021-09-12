@@ -19,8 +19,11 @@ namespace Insulin_diary
         private void FormShowAllValues_Load(object sender, EventArgs e)
         {
             string command = "SELECT * FROM Notes";
-            Connection(command);
+            Connection(command);    /* here program calling Connection method with command parameter, for the upload all data into the listview */
         }
+
+
+        /* this method upload all data from MS SQL database into listview */
         public void Connection(string command)
         {
             var connection = "Data Source=DESKTOP-ELB063I\\SQLEXPRESS01;Initial Catalog=InsulinDiary;Integrated Security=True";
@@ -35,14 +38,14 @@ namespace Insulin_diary
                 while (reader.Read())
                 {
                     uploadList.Add(reader["ID"].ToString());
-                    uploadList.Add(DateTime.Parse(reader["DateOfMeasurement"].ToString()).ToShortDateString());
-                    uploadList.Add(DateTime.Parse(reader["TimeOfMeasurement"].ToString()).ToShortTimeString());
+                    uploadList.Add(DateTime.Parse(reader["DateOfMeasurement"].ToString()).ToShortDateString());     /* method ToShortDateString() returns to listview just short date format */
+                    uploadList.Add(DateTime.Parse(reader["TimeOfMeasurement"].ToString()).ToShortTimeString());     /* method ToShortTimeString() returns to listview just short time format */
                     uploadList.Add(reader["ReferenceValue"].ToString());
                 }
                 reader.Close();
 
                 string[] data = new string[4];
-                double averageValue = 0;
+                double averageValue = 0;    /* this variable sums all the sugar values entered in the database */
                 int counter = 0;
 
                 for (int i = 0; i < uploadList.Count - 3; i++)
@@ -65,7 +68,7 @@ namespace Insulin_diary
                         counter++;
                     }
                 }
-                lblAverageValue.Text = (averageValue / counter).ToString("F");
+                lblAverageValue.Text = (averageValue / counter).ToString("F");      /* "F" returns into form short average value, like 5,74 instead of 5,744444... */
             }
             catch (Exception e)
             {
@@ -75,6 +78,7 @@ namespace Insulin_diary
 
         private void FormShowAllValues_FormClosing(object sender, FormClosingEventArgs e)
         {
+            /* when the user chooses to close this form, the f instance will show to the user the main form */
             var f = new FormInsulinDiary();
             f.Show();
         }
